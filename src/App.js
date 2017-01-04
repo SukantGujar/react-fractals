@@ -35,7 +35,7 @@ class App extends Component {
     realMax = 11;
 
     componentDidMount() {
-        d3select(this.refs.svg).on("mousemove", this.onMouseMove.bind(this));
+        d3select(this.svgComp).on("mousemove", this.onMouseMove.bind(this));
 
         this.next();
     }
@@ -56,7 +56,7 @@ class App extends Component {
         if (this.running) return;
         this.running = true;
 
-        const [x, y] = d3mouse(this.refs.svg),
+        const [x, y] = d3mouse(this.svgComp),
 
               scaleFactor = scaleLinear().domain([this.svg.height, 0])
                                          .range([0, .8]),
@@ -79,7 +79,7 @@ class App extends Component {
                     <h2>This is a dancing Pythagoras tree</h2>
                 </div>
                 <p className="App-intro">
-                    <svg width={this.svg.width} height={this.svg.height} ref="svg"
+                    <svg width={this.svg.width} height={this.svg.height} ref={(comp)=>this.svgComp = comp}
                          style={{border: "1px solid lightgray"}}>
 
                         <Pythagoras w={this.state.baseW}
