@@ -1,16 +1,16 @@
 
 import React from 'react';
 import { interpolateViridis } from 'd3-scale';
+import memoize from "lodash.memoize";
 
 Math.deg = function(radians) {
   return radians * (180 / Math.PI);
 };
 
+const key = memoize(({ w, heightFactor, lean }) => [w,heightFactor, lean].join('-'));
+
 const memoizedCalc = function () {
     const memo = {};
-
-    const key = ({ w, heightFactor, lean }) => [w,heightFactor, lean].join('-');
-
     return (args) => {
         const memoKey = key(args);
 
